@@ -1,0 +1,23 @@
+<!--
+  Generated template for the InfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar>
+		<ion-buttons left>
+			<button ion-button icon-only color="primary" (click)="backToHome()">
+				<ion-icon name="ios-arrow-back"></ion-icon>
+				Back
+			</button>
+		</ion-buttons>
+		<ion-title text-center>Hệ thống ATM</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-label text-center>Tài khoản: {{id}}</ion-label>
+	<ion-label text-center>Chi tiết</ion-label>
+	<p text-center>Số tiền còn lại: {{amount}}</p>
+</ion-content>

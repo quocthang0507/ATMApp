@@ -1,32 +1,20 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>
-			ATM
-		</ion-title>
+		<ion-buttons left>
+			<button ion-button icon-only color="primary" (click)="backToLogin()">
+				<ion-icon name="ios-arrow-back"></ion-icon>
+				Back
+			</button>
+		</ion-buttons>
+		<ion-title text-center>Hệ thống ATM</ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	<div class="jumbotron text-center">
-		<h1>Xin chào</h1>
-		<h2>Phát triển ứng dụng trên thiết bị di động</h2>
-	</div>
-	<div class="container" style="font-size: 1.8rem;">
-		<table class="table">
-			<tbody>
-				<tr>
-					<td>Xin chào bạn</td>
-					<td>{{username}}</td>
-				</tr>
-				<tr>
-					<td>Số tài khoản của bạn</td>
-					<td>{{accountNo}}</td>
-				</tr>
-				<tr>
-					<td>Mật khẩu của bạn</td>
-					<td>{{password}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<ion-label text-center>Tài khoản: {{id}}</ion-label>
+	<ion-list>
+		<ion-item style="text-align: center; padding: 10px;">
+			<button ion-button="" (click)="viewInfo()">Xem thông tin tài khoản</button>
+		</ion-item>
+	</ion-list>
 </ion-content>

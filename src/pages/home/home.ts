@@ -1,23 +1,38 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Account } from './Account';
+import { Component, Output, EventEmitter, Injectable } from '@angular/core';
+import { LoginPage } from '../login/login';
+import { InfoPage } from '../info/info';
+import { NavController, Platform } from 'ionic-angular';
+import { GlobalProvider } from '../../providers/global/global';
 
 @Component({
 	selector: 'page-home',
-	templateUrl: 'home.html'
+	templateUrl: 'home.html',
+	entryComponents: [LoginPage]
 })
 
 export class HomePage {
-	constructor() {this.init(); }
+	loginPage = LoginPage;
+	id = '';
 
-	username = "";
-	accountNo = 0;
-	password = "";
-
-	init() {
-		const acc = new Account(1610207, "1610207", 1000000, "La Quoc Thang");
-		this.username = acc.getCustomerName();
-		this.accountNo = acc.getAccountNo();
-		this.password = acc.getPassword();
+	constructor(public nav: NavController) {
 	}
-}
 
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad HomePage');
+		if (!GlobalProvider.logIn) {
+			this.nav.setRoot(LoginPage);
+		}
+		else
+			this.id = GlobalProvider.model.account.getId();
+	}
+
+	viewInfo() {
+		this.nav.setRoot(InfoPage);
+	}
+
+	backToLogin() {
+		// this.nav.push(LoginPage);
+		// this.nav.pop();
+		this.nav.setRoot(LoginPage);
+}
+}
