@@ -3,6 +3,10 @@
 
 ## Cài đặt
 
+```
+Node.js: Download [here](https://nodejs.org/dist/v12.13.1/node-v12.13.1-x64.msi)
+```
+
 ## Lưu ý
 
 ## Hướng dẫn sử dụng
