@@ -11,36 +11,38 @@ import { DepositPage } from '../pages/deposit/deposit';
 import { TransferPage } from '../pages/transfer/transfer';
 import { WithdrawPage } from '../pages/withdraw/withdraw';
 import { GlobalProvider } from '../providers/global/global';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    BalancePage,
-    DepositPage,
-    TransferPage,
-    WithdrawPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    BalancePage,
-    DepositPage,
-    TransferPage,
-    WithdrawPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    GlobalProvider
-  ]
+	declarations: [
+		MyApp,
+		HomePage,
+		LoginPage,
+		BalancePage,
+		DepositPage,
+		TransferPage,
+		WithdrawPage,
+	],
+	imports: [
+		BrowserModule,
+		IonicModule.forRoot(MyApp),
+		IonicStorageModule.forRoot()
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		HomePage,
+		LoginPage,
+		BalancePage,
+		DepositPage,
+		TransferPage,
+		WithdrawPage,
+	],
+	providers: [
+		StatusBar,
+		SplashScreen,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		GlobalProvider,
+	]
 })
 export class AppModule { }

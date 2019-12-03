@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Toast } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { GlobalProvider } from '../../providers/global/global';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -23,12 +24,11 @@ export class LoginPage {
 	success: boolean;
 	toast: Toast;
 
-	constructor(public nav: NavController, public toastController: ToastController) {
+	constructor(public nav: NavController, public toastController: ToastController, public storage: Storage) {
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad LoginPage');
-		GlobalProvider.model.start();
 	}
 
 	login() {
@@ -36,15 +36,14 @@ export class LoginPage {
 		data = [this.username, this.password];
 		this.success = GlobalProvider.controller.processMenu(GlobalProvider.model, 1, data);
 		if (this.success) {
-			console.log("login ok");
-			localStorage.setItem('login', 'on');
-			// this.nav.push(HomePage);
-			// this.nav.pop();
+			console.log("Login successfully");
+			this.storage.set('login', 'on');
+			GlobalProvider.model.find(this.username);
 			this.nav.setRoot(HomePage);
 		}
 		else {
-			console.log("login failed");
-			localStorage.setItem('login', 'off');
+			console.log("Login failed");
+			this.storage.set('login', 'off');
 			this.toast = this.toastController.create({
 				message: 'Login failed',
 				duration: 2000,

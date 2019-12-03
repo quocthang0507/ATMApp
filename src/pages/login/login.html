@@ -15,14 +15,19 @@
 	<ion-list>
 		<ion-item>
 			<ion-label fixed>Username: </ion-label>
-			<ion-input [(ngModel)]="username" type="text" placeholder="Nhập tên đăng nhập" value="quocthang0507@gmail.com"></ion-input>
+			<ion-input [(ngModel)]="username" type="text" placeholder="Nhập tên đăng nhập"
+				value="quocthang0507@gmail.com"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label fixed>Password: </ion-label>
 			<ion-input [(ngModel)]="password" type="password" placeholder="Nhập mật khẩu" value="1234"></ion-input>
 		</ion-item>
-		<div style="text-align: center; padding: 10px;">
-			<button ion-button="" (click)="login()">Sign in</button>
-		</div>
+		<ion-list>
+			<button block ion-button="" (click)="login()">Sign in</button>
+			<button block ion-button="" (click)="login()">Nhập</button>
+			<button block ion-button="" (click)="login()">Thêm</button>
+			<button block ion-button="" (click)="login()">Xóa</button>
+			<button block ion-button="" (click)="login()">Xem tất cả</button>
+		</ion-list>
 	</ion-list>
 </ion-content>

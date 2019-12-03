@@ -6,6 +6,8 @@ import { TransferPage } from '../transfer/transfer';
 import { WithdrawPage } from '../withdraw/withdraw';
 import { NavController, Platform } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
 	selector: 'page-home',
@@ -16,18 +18,20 @@ export class HomePage {
 	loginPage = LoginPage;
 	id = '';
 
-	constructor(public nav: NavController) {
+	constructor(public nav: NavController, public platform: Platform, public storage: Storage) {
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad HomePage');
-		let value = localStorage.getItem('login');
-		if (value == 'off') {
-			this.nav.setRoot(LoginPage);
-		}
-		else {
-			this.id = GlobalProvider.model.getId();
-		}
+		this.storage.get('login').then((result) => {
+			if (!result || result != 'on') {
+				console.log('No login');
+				this.nav.setRoot(LoginPage);
+			}
+			else {
+				this.id = GlobalProvider.model.getId();
+			}
+		});
 	}
 
 	goToBalance() {
@@ -35,9 +39,12 @@ export class HomePage {
 	}
 
 	backToLogin() {
-		// this.nav.push(LoginPage);
-		// this.nav.pop();
 		this.nav.setRoot(LoginPage);
+	}
+
+	exit() {
+		this.storage.set('login', 'off');
+		this.platform.exitApp();
 	}
 
 	goToWithdraw() {
