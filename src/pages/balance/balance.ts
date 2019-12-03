@@ -32,7 +32,6 @@ export class BalancePage {
 	}
 
 	backToHome() {
-		// this.nav.push(HomePage);
-		this.nav.setRoot(HomePage);
+		this.nav.pop();
 	}
 }

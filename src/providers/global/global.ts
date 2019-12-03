@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Controller } from '../../Controllers/Controller';
 import { Model } from '../../Models/Model';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the GlobalProvider provider.
@@ -11,10 +11,10 @@ import { Model } from '../../Models/Model';
 */
 @Injectable()
 export class GlobalProvider {
-	public static controller: Controller = new Controller();
-	public static model: Model = new Model();
+	public static model: Model;
 
-	constructor(public http: HttpClient) {
+	constructor(public storage: Storage) {
 		console.log('Hello GlobalProvider Provider');
+		GlobalProvider.model = new Model(storage);
 	}
 }

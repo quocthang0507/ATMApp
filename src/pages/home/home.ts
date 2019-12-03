@@ -7,6 +7,7 @@ import { WithdrawPage } from '../withdraw/withdraw';
 import { NavController, Platform } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { Storage } from '@ionic/storage';
+import { Model } from '../../Models/Model';
 
 
 @Component({
@@ -19,17 +20,26 @@ export class HomePage {
 	id = '';
 
 	constructor(public nav: NavController, public platform: Platform, public storage: Storage) {
+		console.log('Home: Home created');
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad HomePage');
 		this.storage.get('login').then((result) => {
+			// Haven't logged in
 			if (!result || result != 'on') {
-				console.log('No login');
+				console.log('Home: You haven\'t logged in, so I move to Login page');
 				this.nav.setRoot(LoginPage);
 			}
 			else {
-				this.id = GlobalProvider.model.getId();
+				//Have logged in
+				console.log('Home: Logged in');
+				this.storage.get('user').then((r) => {
+					if (r) {
+						GlobalProvider.model.setCurrentAccount(r);
+						this.id = r;
+					}
+				});
 			}
 		});
 	}
@@ -44,6 +54,7 @@ export class HomePage {
 
 	exit() {
 		this.storage.set('login', 'off');
+		console.log('Home: Logged out');
 		this.platform.exitApp();
 	}
 

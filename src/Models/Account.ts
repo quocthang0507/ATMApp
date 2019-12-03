@@ -23,4 +23,8 @@ export class Account {
     public getAmount() {
         return this.amount;
     }
+
+    public getPassword() {
+        return this.password;
+    }
 }
