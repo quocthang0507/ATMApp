@@ -1,6 +1,7 @@
-import { Model } from "./Model";
+import { Model } from "../Models/Model";
 import { Injectable } from "@angular/core";
 
+@Injectable()
 export class Controller {
     public processMenu(model: Model, action: number, data: string[]) {
         switch (action) {

@@ -1,3 +1,6 @@
+import { Injectable } from "@angular/core";
+
+@Injectable()
 export class Account {
     private id: string;
     private password: string;

@@ -12,11 +12,11 @@ import { GlobalProvider } from '../../providers/global/global';
 
 @IonicPage()
 @Component({
-	selector: 'page-info',
-	templateUrl: 'info.html',
+	selector: 'page-balance',
+	templateUrl: 'balance.html',
 })
 
-export class InfoPage {
+export class BalancePage {
 
 	homePage = HomePage;
 	id: string;
@@ -26,9 +26,9 @@ export class InfoPage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad InfoPage');
-		this.id = GlobalProvider.model.account.getId();
-		this.amount = GlobalProvider.model.account.getAmount();
+		console.log('ionViewDidLoad BalancePage');
+		this.id = GlobalProvider.model.getId();
+		this.amount = GlobalProvider.model.getAmount();
 	}
 
 	backToHome() {

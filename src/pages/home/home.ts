@@ -1,13 +1,15 @@
 import { Component, Output, EventEmitter, Injectable } from '@angular/core';
 import { LoginPage } from '../login/login';
-import { InfoPage } from '../info/info';
+import { BalancePage } from '../balance/balance';
+import { DepositPage } from '../deposit/deposit';
+import { TransferPage } from '../transfer/transfer';
+import { WithdrawPage } from '../withdraw/withdraw';
 import { NavController, Platform } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html',
-	entryComponents: [LoginPage]
 })
 
 export class HomePage {
@@ -19,20 +21,34 @@ export class HomePage {
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad HomePage');
-		if (!GlobalProvider.logIn) {
+		let value = localStorage.getItem('login');
+		if (value == 'off') {
 			this.nav.setRoot(LoginPage);
 		}
-		else
-			this.id = GlobalProvider.model.account.getId();
+		else {
+			this.id = GlobalProvider.model.getId();
+		}
 	}
 
-	viewInfo() {
-		this.nav.setRoot(InfoPage);
+	goToBalance() {
+		this.nav.push(BalancePage);
 	}
 
 	backToLogin() {
 		// this.nav.push(LoginPage);
 		// this.nav.pop();
 		this.nav.setRoot(LoginPage);
-}
+	}
+
+	goToWithdraw() {
+		this.nav.push(WithdrawPage);
+	}
+
+	goToDeposit() {
+		this.nav.push(DepositPage);
+	}
+
+	goToTransfer() {
+		this.nav.push(TransferPage);
+	}
 }

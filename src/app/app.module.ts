@@ -6,7 +6,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { InfoPage } from '../pages/info/info';
+import { BalancePage } from '../pages/balance/balance';
+import { DepositPage } from '../pages/deposit/deposit';
+import { TransferPage } from '../pages/transfer/transfer';
+import { WithdrawPage } from '../pages/withdraw/withdraw';
 import { GlobalProvider } from '../providers/global/global';
 
 @NgModule({
@@ -14,7 +17,10 @@ import { GlobalProvider } from '../providers/global/global';
     MyApp,
     HomePage,
     LoginPage,
-    InfoPage
+    BalancePage,
+    DepositPage,
+    TransferPage,
+    WithdrawPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,10 @@ import { GlobalProvider } from '../providers/global/global';
     MyApp,
     HomePage,
     LoginPage,
-    InfoPage
+    BalancePage,
+    DepositPage,
+    TransferPage,
+    WithdrawPage
   ],
   providers: [
     StatusBar,

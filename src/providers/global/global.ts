@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Controller } from '../../Controller';
-import { Model } from '../../Model';
+import { Controller } from '../../Controllers/Controller';
+import { Model } from '../../Models/Model';
 
 /*
   Generated class for the GlobalProvider provider.
@@ -13,7 +13,6 @@ import { Model } from '../../Model';
 export class GlobalProvider {
 	public static controller: Controller = new Controller();
 	public static model: Model = new Model();
-	public static logIn: boolean = false;
 
 	constructor(public http: HttpClient) {
 		console.log('Hello GlobalProvider Provider');

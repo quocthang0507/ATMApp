@@ -1,7 +1,13 @@
 import { Account } from "./Account";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class Model {
-    account: Account;
+    private account: Account;
+
+    constructor(){
+        this.start();
+    }
 
     public start() {
         this.account = new Account("quocthang0507@gmail.com", "1234", 100000);
@@ -13,5 +19,9 @@ export class Model {
 
     public getId(){
         return this.account.getId();
+    }
+
+    public getAmount(){
+        return this.account.getAmount();
     }
 }

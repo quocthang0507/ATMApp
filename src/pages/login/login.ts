@@ -37,13 +37,14 @@ export class LoginPage {
 		this.success = GlobalProvider.controller.processMenu(GlobalProvider.model, 1, data);
 		if (this.success) {
 			console.log("login ok");
-			GlobalProvider.logIn = true;
+			localStorage.setItem('login', 'on');
 			// this.nav.push(HomePage);
 			// this.nav.pop();
 			this.nav.setRoot(HomePage);
 		}
 		else {
 			console.log("login failed");
+			localStorage.setItem('login', 'off');
 			this.toast = this.toastController.create({
 				message: 'Login failed',
 				duration: 2000,
