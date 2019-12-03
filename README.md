@@ -7,13 +7,22 @@
 * Java JDK 8u231: Download [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * Gradle: Download and install [here](https://gradle.org/install/)
 * Android SDK: You can download Android Studio with Android SDK built-in [here](https://developer.android.com/studio/)
-* An Android Device or Android Virtual Device (enabled ADB Debugging Mode)
+* An Android Device or Android Virtual Device (enabled ADB Debugging Mode) is necessary
 * Finally, the full instruction you can find [here](https://ionicframework.com/docs/installation/android)
 
 ## Lưu ý
 
 ## Hướng dẫn sử dụng
 
+To install Ionic and create project
+```
+npm install -g ionic
+ionic start myApp tabs
+cd myApp
+ionic serve
+```
+
+To create project with Ionic 3
 ```
 ionic start ATMApp blank --type=ionic-angular
 ionic generate page login
