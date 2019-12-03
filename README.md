@@ -3,9 +3,9 @@
 
 ## Cài đặt
 
-```
-Node.js: Download [here](https://nodejs.org/dist/v12.13.1/node-v12.13.1-x64.msi)
-```
+* Node.js v12.13: Download [here](https://nodejs.org/en/)
+* Java JDK 8u231: Download [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* Gradle: Download and install [here](https://gradle.org/install/)
 
 ## Lưu ý
 
