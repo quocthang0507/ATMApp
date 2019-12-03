@@ -1,5 +1,5 @@
 # ATMApp
-> ATM Application using Ionic with MVC
+> ATM Application using Ionic 3 with MVC
 
 ## Cài đặt
 
@@ -22,13 +22,15 @@ cd myApp
 ionic serve
 ```
 
-To create project with Ionic 3
+To create project with Ionic 3 and build
 ```
 ionic start ATMApp blank --type=ionic-angular
 ionic generate page login
 ionic cordova build android
 ionic cordova run android
 ```
+
+To design pages for Ionic project, you can using [it](https://creator.ionic.io/).
 
 ## Yêu cầu
 
