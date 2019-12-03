@@ -5,8 +5,14 @@
 
 ## Lưu ý
 
-
 ## Hướng dẫn sử dụng
+
+```
+ionic start ATMApp blank --type=ionic-angular
+ionic generate page login
+ionic cordova build android
+ionic cordova run android
+```
 
 ## Yêu cầu
 
