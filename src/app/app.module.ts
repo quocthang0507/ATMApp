@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
@@ -10,6 +11,7 @@ import { BalancePage } from '../pages/balance/balance';
 import { DepositPage } from '../pages/deposit/deposit';
 import { TransferPage } from '../pages/transfer/transfer';
 import { WithdrawPage } from '../pages/withdraw/withdraw';
+import { CapturePage } from '../pages/capture/capture';
 import { GlobalProvider } from '../providers/global/global';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -22,6 +24,7 @@ import { IonicStorageModule } from '@ionic/storage';
 		DepositPage,
 		TransferPage,
 		WithdrawPage,
+		CapturePage,
 	],
 	imports: [
 		BrowserModule,
@@ -37,12 +40,14 @@ import { IonicStorageModule } from '@ionic/storage';
 		DepositPage,
 		TransferPage,
 		WithdrawPage,
+		CapturePage,
 	],
 	providers: [
 		StatusBar,
 		SplashScreen,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		GlobalProvider,
+		Camera
 	]
 })
 export class AppModule { }

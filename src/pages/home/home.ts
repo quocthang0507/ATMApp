@@ -7,8 +7,7 @@ import { WithdrawPage } from '../withdraw/withdraw';
 import { NavController, Platform } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { Storage } from '@ionic/storage';
-import { Model } from '../../Models/Model';
-
+import { CapturePage } from '../capture/capture';
 
 @Component({
 	selector: 'page-home',
@@ -68,5 +67,9 @@ export class HomePage {
 
 	goToTransfer() {
 		this.nav.push(TransferPage);
+	}
+
+	goToCapture() {
+		this.nav.push(CapturePage);
 	}
 }
