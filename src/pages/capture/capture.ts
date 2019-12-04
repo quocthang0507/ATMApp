@@ -74,9 +74,10 @@ export class CapturePage {
 
 	loadPictureFromStorage() {
 		this.storage.get('image').then((result) => {
-			if (result != null)
+			if (result != null) {
 				this.image = result;
+				console.log('Capture: Load picture to storage successfully');
+			}
 		});
-		console.log('Capture: Load picture to storage successfully');
 	}
 }

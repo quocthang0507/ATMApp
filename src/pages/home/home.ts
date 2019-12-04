@@ -4,10 +4,11 @@ import { BalancePage } from '../balance/balance';
 import { DepositPage } from '../deposit/deposit';
 import { TransferPage } from '../transfer/transfer';
 import { WithdrawPage } from '../withdraw/withdraw';
-import { NavController, Platform } from 'ionic-angular';
-import { GlobalProvider } from '../../providers/global/global';
-import { Storage } from '@ionic/storage';
 import { CapturePage } from '../capture/capture';
+import { MapPage } from '../map/map';
+import { Storage } from '@ionic/storage';
+import { GlobalProvider } from '../../providers/global/global';
+import { NavController, Platform } from 'ionic-angular';
 
 @Component({
 	selector: 'page-home',
@@ -71,5 +72,9 @@ export class HomePage {
 
 	goToCapture() {
 		this.nav.push(CapturePage);
+	}
+
+	goToMap() {
+		this.nav.push(MapPage);
 	}
 }
