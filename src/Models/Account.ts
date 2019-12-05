@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class Account {
-    private id: string;
-    private password: string;
-    private amount: number;
+    id: string;
+    password: string;
+    amount: number;
 
     constructor(id, password, amount) {
         this.id = id;

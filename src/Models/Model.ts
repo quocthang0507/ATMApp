@@ -12,29 +12,31 @@ export class Model {
         this.add(new Account("laquocthang", "1234", 100000));
     }
 
-    public readDataFromStorage(): Promise<Account[]> {
+    public readDataFromStorage() {
+        this.storage.get('list').then(result => {
+            if (!result) {
+                this.list = JSON.parse(result);
+            }
+        });
         console.log('Model: Read data from storage successfully');
-        return this.storage.get('accounts');
+    }
+
+    public removeDataFromStorage(): Promise<any> {
+        return this.storage.remove('list');
     }
 
     public saveDataToStorage() {
-        let savedAccounts = [];
-        this.list.forEach((account) => {
-            savedAccounts.push({
-                accountNo: account.getId(),
-                password: account.getPassword(),
-                amount: account.getAmount(),
-            });
-        });
-        this.storage.set('list', savedAccounts);
+        this.removeDataFromStorage();
+        this.storage.set('list', JSON.stringify(this.list));
         console.log('Model: Save data to storage successfully');
     }
 
-    add(account: Account) {
+    public add(account: Account) {
         let success: Boolean;
+        this.readDataFromStorage();
         if (this.find(account.getId()) == null) {
             this.list.push(account);
-            console.log('Model: I will add new account because there are no existing account');
+            console.log('Model: I will add new account because there are no existing same account');
             this.saveDataToStorage();
             success = true;
         }
@@ -47,7 +49,6 @@ export class Model {
     }
 
     public login(id: string, password: string) {
-        this.readDataFromStorage();
         console.log('Model: Checking login info...');
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].checkLogin(id, password)) {
@@ -84,8 +85,8 @@ export class Model {
     }
 
     public getAllAccounts() {
-        let result: string[] = [];
         this.readDataFromStorage();
+        let result: string[] = [];
         console.log('Model: Getting all account name');
         this.list.forEach(account => {
             result.push(account.getId());
@@ -103,6 +104,7 @@ export class Model {
         let index: number = this.list.indexOf(account, 0);
         this.list.splice(index, 1);
         console.log('Model: Remove customer with id = ' + id);
+        this.saveDataToStorage();
         return true;
     }
 }
