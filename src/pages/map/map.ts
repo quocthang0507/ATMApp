@@ -40,11 +40,12 @@ export class MapPage {
 	}
 
 	setMap(latitude, longitude) {
-		console.log('Map: Setting map...');
+		console.log('Map: Showing map...');
 		let options = {
 			center: new google.maps.LatLng(latitude, longitude),
 			zoom: 15,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
+			
 		}
 		this.map = new google.maps.Map(this.mapElement.nativeElement, options);
 	}
