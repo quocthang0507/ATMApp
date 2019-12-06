@@ -19,6 +19,8 @@ declare var google;
 export class MapPage {
 	@ViewChild('map') mapElement: ElementRef;
 	map: any;
+	latitude: number;
+	longitude: number;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
 	}
@@ -31,8 +33,10 @@ export class MapPage {
 	getCurrentPosition() {
 		console.log('Map: Getting current location...');
 		this.geolocation.getCurrentPosition().then(result => {
-			console.log('Map: Your position ' + result.coords.latitude + ' ; ' + result.coords.longitude);
-			this.setMap(result.coords.latitude, result.coords.longitude);
+			this.latitude = result.coords.latitude;
+			this.longitude = result.coords.longitude;
+			console.log('Map: Your position ' + this.latitude + ', ' + this.longitude);
+			this.setMap(this.latitude, this.longitude);
 		},
 			error => {
 				console.log('Map: Error ' + error);
@@ -45,8 +49,27 @@ export class MapPage {
 			center: new google.maps.LatLng(latitude, longitude),
 			zoom: 15,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
-			
+
 		}
 		this.map = new google.maps.Map(this.mapElement.nativeElement, options);
+	}
+
+	addInfoWindow(marker, content) {
+		let infoWindow = new google.maps.InfoWindow({
+			content: content
+		});
+		google.maps.event.addListener(marker, 'click', () => {
+			infoWindow.open(this.map, marker);
+		});
+	}
+
+	addMarker() {
+		let marker = new google.maps.Marker({
+			map: this.map,
+			animation: google.maps.Animation.DROP,
+			position: this.map.getCenter()
+		});
+		let content = "<h5>Vị trí của bạn</h5><p>" + this.latitude + ", " + this.longitude + "</p>";
+		this.addInfoWindow(marker, content);
 	}
 }

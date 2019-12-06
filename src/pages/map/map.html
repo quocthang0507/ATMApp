@@ -11,11 +11,17 @@
 		<ion-title>
 			Map
 		</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="addMarker()">
+				<ion-icon name="add"></ion-icon>
+				Đánh dấu
+			</button>
+		</ion-buttons>
 	</ion-navbar>
 </ion-header>
 
-<ion-content >
-	<div #map id="map" style="height: 100%;">
+<ion-content>
+	<div #map id="map">
 
 	</div>
 </ion-content>

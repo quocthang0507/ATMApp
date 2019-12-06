@@ -2,13 +2,15 @@ import { Account } from "./Account";
 import { Injectable } from "@angular/core";
 import { Storage } from '@ionic/storage';
 import { Platform } from "ionic-angular";
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class Model {
     private list: Account[] = [];
     private current: Account;
 
-    constructor(public storage: Storage, public platform: Platform) {
+    constructor(public storage: Storage, public platform: Platform, public http: Http) {
         console.log('Model: Model created');
     }
 
@@ -23,6 +25,7 @@ export class Model {
             }
         });
         this.add(new Account("laquocthang", "1234", 100000));
+        this.getDataFromServer();
     }
 
     public getDataFromStorage(): Promise<any> {
@@ -112,5 +115,34 @@ export class Model {
         console.log('Model: Remove customer with id = ' + id);
         this.saveDataToStorage();
         return true;
+    }
+
+    public getDataFromServer() {
+        let url = 'http://pvhoang.vn/atm/atmData.php';
+        this.http.get(url, {}).map(result => result.json()).subscribe(response => {
+            //Response
+            let t = JSON.parse(response.accounts);
+            console.log('Response: ' + t);
+            t.forEach(element => {
+                this.add(new Account(element.accountNo, element.password, element.amount));
+            });
+        },
+            error => {
+                console.log(error.message);
+            });
+    }
+
+    public saveDataToServer() {
+        let url = 'http://pvhoang.vn/atm/atmData.php';
+        let params = 'param=1';
+        let header = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+        this.http.post(url, params, { headers: header }).map(res => res.json()).subscribe(response => {
+            //...
+            console.log('Response: ' + response);
+        },
+            error => {
+                console.log(error.message);
+            }
+        );
     }
 }

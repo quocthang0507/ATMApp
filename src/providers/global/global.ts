@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Model } from '../../Models/Model';
 import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
+import { Http } from '@angular/http';
 
 /*
   Generated class for the GlobalProvider provider.
@@ -15,9 +16,9 @@ import { Platform } from 'ionic-angular';
 export class GlobalProvider {
 	public static model: Model;
 
-	constructor(public storage: Storage, public platform: Platform) {
+	constructor(public storage: Storage, public platform: Platform, public http: Http) {
 		console.log('Hello GlobalProvider Provider');
-		GlobalProvider.model = new Model(storage, platform);
+		GlobalProvider.model = new Model(storage, platform, http);
 		GlobalProvider.model.start();
 	}
 }
