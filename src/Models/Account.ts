@@ -2,22 +2,22 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class Account {
-    id: string;
+    accountNo: string;
     password: string;
     amount: number;
 
-    constructor(id, password, amount) {
-        this.id = id;
+    constructor(accountNo, password, amount) {
+        this.accountNo = accountNo;
         this.password = password;
         this.amount = amount;
     }
 
-    public checkLogin(id: string, password: string) {
-        return this.id == id && this.password == password;
+    public checkLogin(accountNo: string, password: string) {
+        return this.accountNo == accountNo && this.password == password;
     }
 
-    public getId() {
-        return this.id;
+    public getAccountNo() {
+        return this.accountNo;
     }
 
     public getAmount() {
