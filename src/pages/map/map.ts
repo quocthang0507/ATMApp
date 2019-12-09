@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 declare var google;
 
@@ -19,15 +19,20 @@ declare var google;
 export class MapPage {
 	@ViewChild('map') mapElement: ElementRef;
 	map: any;
-	latitude: number;
-	longitude: number;
+	latitude: number = 21.028511;
+	longitude: number = 105.804817; //Hanoi - Default location
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation, public platform: Platform) {
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad MapPage');
-		this.getCurrentPosition();
+		this.platform.ready().then(() => {
+			//Ionic fails to get Android's location so I will load default map 
+			this.loadMap(this.latitude, this.longitude);
+			//If Ionic gets Android's Location successfully, it will be shown your map
+			this.getCurrentPosition();
+		})
 	}
 
 	getCurrentPosition() {
@@ -36,14 +41,13 @@ export class MapPage {
 			this.latitude = result.coords.latitude;
 			this.longitude = result.coords.longitude;
 			console.log('Map: Your position ' + this.latitude + ', ' + this.longitude);
-			this.setMap(this.latitude, this.longitude);
-		},
-			error => {
-				console.log('Map: Error ' + error);
-			});
+			this.loadMap(this.latitude, this.longitude);
+		}).catch(error => {
+			console.log('Map: Error ' + error);
+		});
 	}
 
-	setMap(latitude, longitude) {
+	loadMap(latitude, longitude) {
 		console.log('Map: Showing map...');
 		let options = {
 			center: new google.maps.LatLng(latitude, longitude),
