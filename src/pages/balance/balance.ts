@@ -20,15 +20,15 @@ export class BalancePage {
 
 	homePage = HomePage;
 	id: string;
-	amount: number;
+	amount: string;
 
 	constructor(public nav: NavController, public navParams: NavParams) {
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad BalancePage');
-		this.id = GlobalProvider.model.getId();
-		this.amount = GlobalProvider.model.getAmount();
+		this.id = GlobalProvider.model.getAccountNo();
+		this.amount = GlobalProvider.model.getAmount().toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
 	}
 
 	backToHome() {

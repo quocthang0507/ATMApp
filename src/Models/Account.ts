@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 @Injectable()
+//Model: Account class
 export class Account {
     accountNo: string;
     password: string;

@@ -6,6 +6,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
+//Model: To communicate with storage and server
 export class Model {
     private list: Account[] = [];
     private current: Account;
@@ -13,6 +14,11 @@ export class Model {
 
     constructor(public storage: Storage, public platform: Platform, public http: Http) {
         console.log('Model: Model created');
+        this.storage.get('user').then((r) => {
+            if (r) {
+                this.setCurrentAccount(r);
+            }
+        });
     }
 
     start() {
@@ -25,8 +31,8 @@ export class Model {
                 });
             }
         });
-        this.add(new Account("laquocthang", "1234", 100000));
         this.getDataFromServer();
+        this.add(new Account("laquocthang", "1234", 100000)); //Default account
     }
 
     public getDataFromStorage(): Promise<any> {
@@ -48,10 +54,12 @@ export class Model {
         let url = this.urlPHP;
         this.http.get(url, {}).map(result => result.json()).subscribe(response => {
             //Response
-            let t = JSON.parse(response.accounts);
-            t.forEach(element => {
-                this.add(new Account(element.accountNo, element.password, element.amount));
-            });
+            if (response.accounts != '') {
+                let t = JSON.parse(response.accounts);
+                t.forEach(element => {
+                    this.add(new Account(element.accountNo, element.password, element.amount));
+                });
+            }
             console.log('Model: Get data from server successfully');
         },
             error => {
@@ -61,9 +69,7 @@ export class Model {
 
     public saveDataToServer() {
         let url = this.urlPHP;
-        let params = JSON.stringify({
-            "accounts": JSON.stringify(this.list)
-        });
+        let params = "accounts=" + JSON.stringify(this.list);
         let header = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
         this.http.post(url, params, { headers: header }).map(res => res.json()).subscribe(response => {
             console.log(response.message);
@@ -80,17 +86,19 @@ export class Model {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].checkLogin(accountNo, password)) {
                 this.current = this.list[i];
+                this.storage.set('user', this.current.accountNo); //The user have logged in.
                 return true;
             }
         }
         return false;
     }
 
+    //Find and return a user account
     public find(accountNo: string) {
         console.log('Model: Looking for account...');
         for (let i = 0; i < this.list.length; i++) {
             if ((this.list[i] as Account).getAccountNo() == accountNo) {
-                console.log('Found user');
+                console.log('Model: Found user');
                 return this.list[i];
             }
         }
