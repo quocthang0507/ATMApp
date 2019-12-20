@@ -30,7 +30,7 @@ ionic cordova build android
 ionic cordova run android
 ```
 
-To design pages for Ionic project, you can using [it](https://creator.ionic.io/).
+To design pages for Ionic project, you can use [it](https://creator.ionic.io/).
 
 ## Yêu cầu
 
